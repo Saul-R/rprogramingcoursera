@@ -5,3 +5,7 @@
 This is just my R files for the assignments of the course and maybe some notes and giveaways.
 
 Started on **Jan/2015**.
+
+Links to dataSet used.
+
+For the pollutantmean (add links later)
