@@ -11,15 +11,10 @@ pollutantmeanImpl <- function(directory, pollutant, id = 1:332) {
   
   ## Return the mean of the pollutant across all monitors list
   ## in the 'id' vector (ignoring NA values)
+  if(!exists("bindedCsv"){
+    bindedCsv<-mycsvBinder(directory)    
+  }
   
-  savewd<-getwd()
-  setwd(paste(getwd(),"directory",sep=""))
-  
-  filenames <- list.files(path = getwd())
-  fullfile <- do.call(rbind,lapply(filenames, read.csv, header = TRUE))
-  
-  setwd(savedwd)
-  mean(x = fullfile[fullfile$ID %in% id,pollutant],na.rm = TRUE)
-  
-  
+  mean(x = bindedCsv[bindedCsv$ID %in% id,pollutant],na.rm = TRUE)
+    
 }
