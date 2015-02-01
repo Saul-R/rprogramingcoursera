@@ -12,6 +12,8 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   ## Return the mean of the pollutant across all monitors list
   ## in the 'id' vector (ignoring NA values)
   
+  ## Passed all 4 tests, try with bindedCsv on workspace
+  
   if(!exists("bindedCsv")){
     bindedCsv<-mycsvBinder(directory)    
   }
