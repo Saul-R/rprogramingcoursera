@@ -12,10 +12,14 @@ complete <- function(directory, id = 1:332) {
   ## ...
   ## where 'id' is the monitor ID number and 'nobs' is the
   ## number of complete cases
+  if(!exists("bindedCsv")){
+    bindedCsv<-mycsvBinder(directory)    
+  }
+  completeDS<-bindedCsv[complete.cases(bindedCsv),"ID"]
   
-  listMonitors<-lapply(id,getCsvByIndex,directory = directory)
-  nobs<-sapply(listMonitors, function (x) sum(complete.cases(x)))
-  result<-as.data.frame(cbind(id,nobs))
-  result
-  
+  subcompleteDS<-completeDS[completeDS %in% id]
+  tab<-table(subcompleteDS)
+  id <- as.numeric(names(tab))
+  nobs<-as.vector(tab)
+  as.data.frame(cbind(id,nobs))
 }
