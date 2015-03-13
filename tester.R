@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 pollutantmean <- function(directory, pollutant, id = 1:332) {
   ## 'directory' is a character vector of length 1 indicating
   ## the location of the CSV files
@@ -11,16 +13,10 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   
   ## Return the mean of the pollutant across all monitors list
   ## in the 'id' vector (ignoring NA values)
-
-  mydata<-lapply(id,getCsvByIndex, directory = directory)
-  result <- algorythm_Pollutantmean<-function(mydata,pollutant,id)
-  result
   
-}
-# Separate imput data from algorythm, to test with JUnit
-algorythm_Pollutantmean <- function(mydata,pollutant,id){
+  mydata<-lapply(id,getCsvByIndex, directory = directory)
   list <- sapply(mydata, function(x) mean(x[,pollutant],na.rm = TRUE))
   result <- cbind(id,list)
   result
 }
-
+pollutantmean("specdata","nitrate",1:3)
